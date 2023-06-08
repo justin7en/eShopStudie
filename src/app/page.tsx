@@ -1,8 +1,9 @@
+import Highlight from "../../components/highlight"
 
 export default function Home() {
   return (
     <div>
-      <h1 className="bg-yellow-200 text-center">Test</h1>
+      <h1 className="">Test</h1>
     </div>
   )
 }
