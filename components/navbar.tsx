@@ -23,8 +23,10 @@ export default function Navbar() {
             <Image
               src={Logo}
               alt="Logo zur Startseite"
+              width={50}
+              height={50}
               style={{objectFit: "contain"}}
-              className="w-1/12 pl-2"
+              className="pl-2"
             />
           </Link>
         </NavigationMenuItem>
