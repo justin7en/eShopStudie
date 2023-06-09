@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import Navbar from "../../components/navbarL";
+import NavbarT from "../../components/navbar";
+import NavbarL from "../../components/navbarL";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,10 +15,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const activated = true
   return (
     <html lang="de">
       <body className={inter.className}>
-        <Navbar content={children} />
+        { activated  
+        ? 
+        <div className="flex">
+          <NavbarL /> 
+          {children}
+        </div>
+        : 
+        <div>
+          <NavbarT />
+          {children}
+        </div>
+        }
       </body>
     </html>
   )
