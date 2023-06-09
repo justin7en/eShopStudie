@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { 
   navigationMenuTriggerStyle,
   navigationMenuActiveStyle,
- } from "./ui/navigation-menu"
+ } from "./ui/navigation-menu-vertical"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,20 +17,16 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from "./ui/navigation-menu"
+} from "./ui/navigation-menu-vertical"
 
-type NavbarLProps = {
-  content: React.ReactNode;
-};
-
-export default function NavbarL( { content }: NavbarLProps ) {
+export default function NavbarL( ) {
   const pathname = usePathname()
 
   return(
     <div className="flex h-screen">
-    <NavigationMenu className="p-2 border-b-2">
+    <NavigationMenu className="p-2 border-r-2 h-full">
       <NavigationMenuList className="flex flex-col">
-        <NavigationMenuItem className="grow pl-2">
+        <NavigationMenuItem className="flex-grow pl-2">
           <Link href={"/"}>
             <Image
               src={Logo}
@@ -64,7 +60,7 @@ export default function NavbarL( { content }: NavbarLProps ) {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem className="grow">
+        <NavigationMenuItem className="flex-grow">
           <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -89,9 +85,6 @@ export default function NavbarL( { content }: NavbarLProps ) {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-    <div className="flex">
-      {content}
-    </div>
     </div>
   )
 }
