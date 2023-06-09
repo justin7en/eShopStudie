@@ -3,7 +3,11 @@
 import Link from "next/link"
 import Image from "next/image"
 import Logo from "../public/Logo-Cloud.png"
-import { navigationMenuTriggerStyle } from "./ui/navigation-menu"
+import { usePathname } from 'next/navigation'
+import { 
+  navigationMenuTriggerStyle,
+  navigationMenuActiveStyle,
+ } from "./ui/navigation-menu"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +20,8 @@ import {
 } from "./ui/navigation-menu"
 
 export default function Navbar() {
+  const pathname = usePathname()
+
   return(
     <NavigationMenu className="p-2 border-b-2">
       <NavigationMenuList>
@@ -32,7 +38,7 @@ export default function Navbar() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href={"/"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink className={pathname === "/" ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>
               Home
             </NavigationMenuLink>
           </Link>
@@ -71,7 +77,7 @@ export default function Navbar() {
         </NavigationMenuItem>
         <NavigationMenuItem className="pr-4">
           <Link href={"/about"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink className={pathname === "/about" ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>
               Über Uns
             </NavigationMenuLink>
           </Link>
