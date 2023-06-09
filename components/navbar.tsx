@@ -30,7 +30,7 @@ export default function Navbar() {
             />
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem className="pl-32 pr-20">
+        <NavigationMenuItem className="pl-20 pr-20">
           <Link href={"/"} legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Home
