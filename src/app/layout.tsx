@@ -23,14 +23,16 @@ export default function RootLayout({
         ? 
         <div className="flex h-screen">
           <NavbarL />
-          <div className="grow">
+          <div className="grow overflow-y-auto">
             {children}
           </div>
         </div>
         : 
         <div className="flex flex-col h-screen overflow-hidden">
           <NavbarT />
-          {children}
+          <div className="grow overflow-y-auto">
+            {children}
+          </div>
         </div>
         }
       </body>
