@@ -1,9 +1,9 @@
-import Highlight from "../../components/highlight"
+import HighlightItemList from "../../components/highlightItem"
 
 export default function Home() {
   return (
     <div>
-      <h1 className="">Test</h1>
+      <HighlightItemList />
     </div>
   )
 }

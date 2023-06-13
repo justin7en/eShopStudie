@@ -15,18 +15,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const activated = true
+  const activated = false
   return (
     <html lang="de">
       <body className={inter.className}>
         { activated  
         ? 
-        <div className="flex">
-          <NavbarL /> 
-          {children}
+        <div className="flex h-screen">
+          <NavbarL />
+          <div className="grow">
+            {children}
+          </div>
         </div>
         : 
-        <div>
+        <div className="flex flex-col h-screen overflow-hidden">
           <NavbarT />
           {children}
         </div>
