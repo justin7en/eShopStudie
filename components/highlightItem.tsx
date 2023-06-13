@@ -20,7 +20,7 @@ function HighlightItem() {
 
 export default function HighlightItemList() {
   return (
-    <div className="p-2 space-y-2">
+    <div className="p-2 space-y-2 overflow-y-auto">
       <HighlightItem />
       <HighlightItem />
       <HighlightItem />
