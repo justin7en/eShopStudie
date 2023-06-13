@@ -23,10 +23,9 @@ export default function NavbarL( ) {
   const pathname = usePathname()
 
   return(
-    <div className="flex h-screen">
-    <NavigationMenu className="p-2 border-r-2 h-full">
-      <NavigationMenuList className="flex flex-col">
-        <NavigationMenuItem className="flex-grow pl-2">
+    <NavigationMenu className="flex border-r-2 rounded-md" orientation="vertical">
+      <NavigationMenuList className="flex flex-col h-screen space-y-2">
+        <NavigationMenuItem className="flex-grow pt-2">
           <Link href={"/"}>
             <Image
               src={Logo}
@@ -46,37 +45,25 @@ export default function NavbarL( ) {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Smartphone</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              <NavigationMenuLink>Apple</NavigationMenuLink>
-            </ul>
+          <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
+            <NavigationMenuLink>Apple</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Tablet</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              <NavigationMenuLink>Samsung</NavigationMenuLink>
-            </ul>
+          <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
+            <NavigationMenuLink>Samsung</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="flex-grow">
           <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              <li>
-                <NavigationMenuLink>Lenovo</NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink>Samsung</NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink>Dell</NavigationMenuLink>
-              </li>
-            </ul>
+          <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
+              <NavigationMenuLink>Lenovo</NavigationMenuLink>
+              <NavigationMenuLink>Samsung</NavigationMenuLink>
+              <NavigationMenuLink>Dell</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem className="pr-4">
+        <NavigationMenuItem className="pb-4">
           <Link href={"/about"} legacyBehavior passHref>
             <NavigationMenuLink className={pathname === "/about" ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>
               Über Uns
@@ -85,6 +72,5 @@ export default function NavbarL( ) {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-    </div>
   )
 }
