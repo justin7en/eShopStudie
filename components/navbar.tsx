@@ -18,9 +18,41 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "./ui/navigation-menu"
+import { useEffect, useState } from "react"
+import { db } from "../firebase"
+import { getDocs, collection } from "firebase/firestore"
+
+interface NavbarList {
+  Kategorie: string;
+  Hersteller: string[];
+}
 
 export default function Navbar() {
   const pathname = usePathname()
+
+  const [NavbarList, setNavbarList] = useState<NavbarList[]>([]);
+  const refKategorieCollection = collection(db, "HerstellerInKategorie");
+  useEffect( () => {
+    const getNavbarList = async () => {
+      try {
+        const data = await getDocs(refKategorieCollection);
+        const filteredData = data.docs.map((doc) => ({
+          Kategorie: doc.id,
+          Hersteller: doc.data().Hersteller
+        }));
+        setNavbarList(filteredData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getNavbarList();
+  }, []);
+
+  const getMarkenByKategorie = (kategorie: string) => {
+    const category = NavbarList.find((item) => item.Kategorie === kategorie);
+    const marken = category ? category.Hersteller : [];
+    return marken.sort();
+  };
 
   return(
     <NavigationMenu className="p-2 border-b-2">
@@ -46,33 +78,31 @@ export default function Navbar() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Smartphone</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              <NavigationMenuLink>Apple</NavigationMenuLink>
-            </ul>
+            <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {getMarkenByKategorie("Smartphone").map((marke) => (
+                <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              ))}
+            </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Tablet</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              <NavigationMenuLink>Samsung</NavigationMenuLink>
-            </ul>
+            <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {getMarkenByKategorie("Tablet").map((marke) => (
+                <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              ))}
+            </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="grow">
           <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              <li>
-                <NavigationMenuLink>Lenovo</NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink>Samsung</NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink>Dell</NavigationMenuLink>
-              </li>
-            </ul>
+            <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {getMarkenByKategorie("Smartphone").map((marke) => (
+                <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              ))}
+            </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="pr-4">

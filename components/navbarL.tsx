@@ -18,9 +18,41 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "./ui/navigation-menu-vertical"
+import { useEffect, useState } from "react"
+import { db } from "../firebase"
+import { getDocs, collection } from "firebase/firestore"
+
+interface NavbarList {
+  Kategorie: string;
+  Hersteller: string[];
+}
 
 export default function NavbarL( ) {
-  const pathname = usePathname()
+  const pathname = usePathname();
+
+  const [NavbarList, setNavbarList] = useState<NavbarList[]>([]);
+  const refKategorieCollection = collection(db, "HerstellerInKategorie");
+  useEffect( () => {
+    const getNavbarList = async () => {
+      try {
+        const data = await getDocs(refKategorieCollection);
+        const filteredData = data.docs.map((doc) => ({
+          Kategorie: doc.id,
+          Hersteller: doc.data().Hersteller
+        }));
+        setNavbarList(filteredData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getNavbarList();
+  }, []);
+
+  const getMarkenByKategorie = (kategorie: string) => {
+    const category = NavbarList.find((item) => item.Kategorie === kategorie);
+    const marken = category ? category.Hersteller : [];
+    return marken.sort();
+  };
 
   return(
     <NavigationMenu className="flex border-r-2 rounded-md" orientation="vertical">
@@ -46,21 +78,25 @@ export default function NavbarL( ) {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Smartphone</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
-            <NavigationMenuLink>Apple</NavigationMenuLink>
+            {getMarkenByKategorie("Smartphone").map((marke) => (
+              <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+            ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Tablet</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
-            <NavigationMenuLink>Samsung</NavigationMenuLink>
+            {getMarkenByKategorie("Tablet").map((marke) => (
+              <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+            ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="flex-grow">
           <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
-              <NavigationMenuLink>Lenovo</NavigationMenuLink>
-              <NavigationMenuLink>Samsung</NavigationMenuLink>
-              <NavigationMenuLink>Dell</NavigationMenuLink>
+            {getMarkenByKategorie("Laptop").map((marke) => (
+              <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+            ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="pb-4">

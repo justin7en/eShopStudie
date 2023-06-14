@@ -57,7 +57,7 @@ export default function HighlightItemList() {
       }
     };
     getHighlightList();
-  }, [filteredCollection]);
+  }, []);
   return (
     <div className="p-2 space-y-2 overflow-y-auto">
       {highlightList.map((item) => (
