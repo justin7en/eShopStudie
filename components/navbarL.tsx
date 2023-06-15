@@ -74,7 +74,9 @@ export default async function NavbarL( ) {
           <NavigationMenuTrigger>Smartphone</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             {getMarkenByKategorie("Smartphone").map((marke) => (
-              <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              <Link href={`/Smartphone/${marke}`} legacyBehavior passHref key={marke}>
+                <NavigationMenuLink>{marke}</NavigationMenuLink>
+              </Link>
             ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -82,7 +84,9 @@ export default async function NavbarL( ) {
           <NavigationMenuTrigger>Tablet</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             {getMarkenByKategorie("Tablet").map((marke) => (
-              <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              <Link href={`/Tablet/${marke}`} legacyBehavior passHref key={marke}>
+                <NavigationMenuLink>{marke}</NavigationMenuLink>
+              </Link>
             ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -90,7 +94,9 @@ export default async function NavbarL( ) {
           <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             {getMarkenByKategorie("Laptop").map((marke) => (
-              <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              <Link href={`/Laptop/${marke}`} legacyBehavior passHref key={marke}>
+                <NavigationMenuLink>{marke}</NavigationMenuLink>
+              </Link>
             ))}
           </NavigationMenuContent>
         </NavigationMenuItem>

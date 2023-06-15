@@ -74,7 +74,9 @@ export default async function Navbar() {
           <NavigationMenuContent>
             <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {getMarkenByKategorie("Smartphone").map((marke) => (
-                <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+                <Link href={`/Smartphone/${marke}`} legacyBehavior passHref key={marke}>
+                  <NavigationMenuLink>{marke}</NavigationMenuLink>
+                </Link>
               ))}
             </div>
           </NavigationMenuContent>
@@ -84,7 +86,9 @@ export default async function Navbar() {
           <NavigationMenuContent>
             <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {getMarkenByKategorie("Tablet").map((marke) => (
-                <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+                <Link href={`/Tablet/${marke}`} legacyBehavior passHref key={marke}>
+                  <NavigationMenuLink>{marke}</NavigationMenuLink>
+                </Link>
               ))}
             </div>
           </NavigationMenuContent>
@@ -93,8 +97,10 @@ export default async function Navbar() {
           <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {getMarkenByKategorie("Smartphone").map((marke) => (
-                <NavigationMenuLink key={marke}>{marke}</NavigationMenuLink>
+              {getMarkenByKategorie("Laptop").map((marke) => (
+                <Link href={`/Laptop/${marke}`} legacyBehavior passHref key={marke}>
+                  <NavigationMenuLink>{marke}</NavigationMenuLink>
+                </Link>
               ))}
             </div>
           </NavigationMenuContent>
