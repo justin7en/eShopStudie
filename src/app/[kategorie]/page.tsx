@@ -10,9 +10,12 @@ async function getKategorie( kategorieName : string) {
     redirect("/");
   }
 
+  const herstellerArray: string[] = data.data().Hersteller || [];
+  const sortedHersteller = herstellerArray.sort();
+
   return {
     Kategorie: data.id,
-    Hersteller: data.data().Hersteller
+    Hersteller: sortedHersteller
   }
 }
 
