@@ -49,7 +49,7 @@ export default async function Navbar() {
   };
 
   return(
-    <NavigationMenu className="p-2 border-b-2">
+    <NavigationMenu className="p-2 border-b-2 rounded-md">
       <NavigationMenuList>
         <NavigationMenuItem className="grow pl-2">
           <Link href={"/"}>
