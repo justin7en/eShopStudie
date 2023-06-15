@@ -71,7 +71,7 @@ export default async function NavbarL( ) {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Smartphone</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={pathname.startsWith("/Smartphone") ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>Smartphone</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             <Link href={"/Smartphone"} legacyBehavior passHref>
               <NavigationMenuLink>Alle Marken</NavigationMenuLink>
@@ -84,7 +84,7 @@ export default async function NavbarL( ) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Tablet</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={pathname.startsWith("/Tablet") ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>Tablet</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             <Link href={"/Tablet"} legacyBehavior passHref>
               <NavigationMenuLink>Alle Marken</NavigationMenuLink>
@@ -97,7 +97,7 @@ export default async function NavbarL( ) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="flex-grow">
-          <NavigationMenuTrigger>Laptop</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={pathname.startsWith("/Laptop") ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             <Link href={"/Laptop"} legacyBehavior passHref>
               <NavigationMenuLink>Alle Marken</NavigationMenuLink>
