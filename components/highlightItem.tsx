@@ -1,8 +1,5 @@
-"use client"
-
 import Image from "next/image"
 import Iphone from "../public/IphonePrototyp.png"
-import { useEffect, useState } from "react"
 import { db } from "../firebase"
 import { getDocs, collection, query, where } from "firebase/firestore"
 
@@ -15,6 +12,27 @@ interface HighlightItem {
   Highlight: boolean;
 }
 
+async function getHighlightItems() {
+  const refArtikelCollection = collection(db, "Artikel");
+  const filteredCollection = query(refArtikelCollection, where("Highlight", "==", true))
+  const data = await getDocs(filteredCollection);
+
+  if (data.empty) {
+    console.error("no highlight items")
+    return []
+  }
+
+  const filteredData = data.docs.map((doc) => ({
+    id: doc.id,
+    Hersteller: doc.data().Hersteller,
+    Kategorie: doc.data().Kategorie,
+    Name: doc.data().Name,
+    Beschreibung: doc.data().Beschreibung,
+    Highlight: doc.data().Highlight,
+  }));
+
+  return filteredData
+}
 
 function HighlightItem( { item }: { item: HighlightItem } ) {
   return (
@@ -33,31 +51,8 @@ function HighlightItem( { item }: { item: HighlightItem } ) {
   )
 }
 
-export default function HighlightItemList() {
-  const [highlightList, setHighlightList] = useState<HighlightItem[]>([]);
-
-  const refArtikelCollection = collection(db, "Artikel");
-  const filteredCollection = query(refArtikelCollection, where("Highlight", "==", true))
-
-  useEffect( () => {
-    const getHighlightList = async () => {
-      try {
-        const data = await getDocs(filteredCollection);
-        const filteredData = data.docs.map((doc) => ({
-          id: doc.id,
-          Hersteller: doc.data().Hersteller,
-          Kategorie: doc.data().Kategorie,
-          Name: doc.data().Name,
-          Beschreibung: doc.data().Beschreibung,
-          Highlight: doc.data().Highlight,
-        }));
-        setHighlightList(filteredData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getHighlightList();
-  }, []);
+export default async function HighlightItemList() {
+  const highlightList = await getHighlightItems();
   return (
     <div className="p-2 space-y-2 overflow-y-auto">
       {highlightList.map((item) => (

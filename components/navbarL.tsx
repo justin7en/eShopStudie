@@ -18,39 +18,34 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "./ui/navigation-menu-vertical"
-import { useEffect, useState } from "react"
 import { db } from "../firebase"
 import { getDocs, collection } from "firebase/firestore"
 
-interface NavbarList {
-  Kategorie: string;
-  Hersteller: string[];
+async function getKategorie() {
+  const refKategorieCollection = collection(db, "HerstellerInKategorie");
+  const data = await getDocs(refKategorieCollection);
+  if(data.empty) {
+    console.error("no categories found")
+    return []
+  }
+
+  const filteredData = data.docs.map((doc) => ({
+    Kategorie: doc.id,
+    Hersteller: doc.data().Hersteller
+  }));
+
+  return filteredData
 }
 
-export default function NavbarL( ) {
+
+export default async function NavbarL( ) {
   const pathname = usePathname();
 
-  const [NavbarList, setNavbarList] = useState<NavbarList[]>([]);
-  const refKategorieCollection = collection(db, "HerstellerInKategorie");
-  useEffect( () => {
-    const getNavbarList = async () => {
-      try {
-        const data = await getDocs(refKategorieCollection);
-        const filteredData = data.docs.map((doc) => ({
-          Kategorie: doc.id,
-          Hersteller: doc.data().Hersteller
-        }));
-        setNavbarList(filteredData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getNavbarList();
-  }, []);
+  const kategorieList = await getKategorie();
 
   const getMarkenByKategorie = (kategorie: string) => {
-    const category = NavbarList.find((item) => item.Kategorie === kategorie);
-    const marken = category ? category.Hersteller : [];
+    const category = kategorieList.find((item) => item.Kategorie === kategorie);
+    const marken : string[] = category ? category.Hersteller : [];
     return marken.sort();
   };
 
