@@ -36,7 +36,7 @@ async function getHighlightItems() {
 
 function HighlightItem( { item }: { item: HighlightItem } ) {
   return (
-    <div className="flex bg-gray-500 p-2 rounded-sm h-64 ">
+    <div className="flex bg-items p-2 rounded-sm h-64 ">
       <div className="grow">
         <h1 className="font-bold text-lg">{item.Name}</h1>
         <p>{item.Beschreibung}</p>

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { db } from "../../../firebase"
 import { getDoc, doc, collection } from "firebase/firestore"
+import CategoryPreview from "../../../components/categoryPreview";
 
 async function getKategorie( kategorieName : string) {
   const refKategorieCollection = collection(db, "HerstellerInKategorie");
@@ -22,12 +23,10 @@ async function getKategorie( kategorieName : string) {
 export default async function Page( { params }: { params: { kategorie: string } }) {
   const content = await getKategorie(params.kategorie);
   return (
-    <div>
-      Kategorie: {content.Kategorie}
-      <div>
-        {content.Hersteller.map((hersteller : string, index : number) => (
-          <div key={index}>{hersteller}</div>
-        ))}
+    <div className="flex flex-col items-center p-2 space-y-2">
+      <h1 className="text-lg "> Kategorie: {content.Kategorie} </h1>
+      <div className="w-full">
+        <CategoryPreview kategorie={content.Kategorie} hersteller={content.Hersteller}/>
       </div>
     </div>
   )
