@@ -5,7 +5,7 @@ interface CategoryList {
   hersteller: string[]
 }
 
-export default function CategoryPreview( herstellerList : CategoryList) {
+export default function CategoryView( herstellerList : CategoryList) {
   return (
     <div className="grid grid-cols-3 gap-4 ">
       {herstellerList.hersteller.map((item : string, index : number) => (

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { db } from "../../../firebase"
 import { getDoc, doc, collection } from "firebase/firestore"
-import CategoryPreview from "../../../components/categoryPreview";
+import CategoryPreview from "../../../components/categoryView";
 
 async function getKategorie( kategorieName : string) {
   const refKategorieCollection = collection(db, "HerstellerInKategorie");
