@@ -19,6 +19,8 @@ import {
 } from "./ui/navigation-menu-vertical"
 import { db } from "../firebase"
 import { getDoc, doc, collection } from "firebase/firestore"
+import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
 
 async function getKategorie(kategorie : string) {
   const refKategorieCollection = collection(db, "HerstellerInKategorie");
@@ -37,10 +39,27 @@ async function getKategorie(kategorie : string) {
 }
 
 
-export default async function NavbarL( ) {
-  const smartphoneData :string[] = await getKategorie("Smartphone")
-  const tabletData :string[]= await getKategorie("Tablet")
-  const laptopData :string[]= await getKategorie("Laptop")
+export default function NavbarL( ) {
+  const [smartphoneData, setSmartphoneData] = useState<string[]>([]);
+  const [tabletData, setTabletData] = useState<string[]>([]);
+  const [laptopData, setLaptopData] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const smartphoneHersteller = await getKategorie("Smartphone");
+      const tabletHersteller = await getKategorie("Tablet");
+      const laptopHersteller = await getKategorie("Laptop");
+
+      setSmartphoneData(smartphoneHersteller);
+      setTabletData(tabletHersteller);
+      setLaptopData(laptopHersteller);
+    }
+
+    fetchData();
+  }, []);
+
+
+  const pathname = usePathname();
 
   return(
     <NavigationMenu className="flex border-r-2 rounded-md" orientation="vertical">
@@ -58,13 +77,13 @@ export default async function NavbarL( ) {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href={"/"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink className={pathname === "/" ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>
               Home
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>Smartphone</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={pathname.startsWith("/Smartphone") ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>Smartphone</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             <Link href={"/Smartphone"} legacyBehavior passHref>
               <NavigationMenuLink>Alle Marken</NavigationMenuLink>
@@ -77,7 +96,7 @@ export default async function NavbarL( ) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>Tablet</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={pathname.startsWith("/Tablet") ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>Tablet</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             <Link href={"/Tablet"} legacyBehavior passHref>
               <NavigationMenuLink>Alle Marken</NavigationMenuLink>
@@ -90,7 +109,7 @@ export default async function NavbarL( ) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem className="flex-grow">
-          <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>Laptop</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={pathname.startsWith("/Laptop") ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>Laptop</NavigationMenuTrigger>
           <NavigationMenuContent className="h-screen flex flex-col justify-center space-y-4 p-4">
             <Link href={"/Laptop"} legacyBehavior passHref>
               <NavigationMenuLink>Alle Marken</NavigationMenuLink>
@@ -104,7 +123,7 @@ export default async function NavbarL( ) {
         </NavigationMenuItem>
         <NavigationMenuItem className="pb-4">
           <Link href={"/about"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink className={pathname === "/about" ? navigationMenuActiveStyle() : navigationMenuTriggerStyle()}>
               Über Uns
             </NavigationMenuLink>
           </Link>
