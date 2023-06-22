@@ -39,18 +39,19 @@ async function getHighlightItems() {
 async function HighlightItem( { item }: { item: HighlightItem } ) {
   const imageUrl = await getImageUrl(item.Kategorie, item.Hersteller, item.Name)
   return (
-    <div className="flex bg-items p-2 rounded-sm h-64 ">
-      <div className="grow">
-        <h1 className="font-bold text-lg">{item.Name}</h1>
-        <p>{item.Beschreibung}</p>
-        <p>{item.Preis}</p>
-      </div>
+    <div className="flex flex-row bg-items p-2 rounded-sm h-64 ">
       <Image 
       src={imageUrl}
       alt="Highlight Item"
       width={400}
       height={400}
+      className=""
       />
+      <div className="flex flex-col pl-4">
+        <h1 className="font-bold text-lg">{item.Name}</h1>
+        <p className="">{item.Beschreibung}</p>
+        <p className="font-bold text-lg">{item.Preis} €</p>
+      </div>
     </div>
   )
 }
