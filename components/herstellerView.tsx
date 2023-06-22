@@ -23,7 +23,7 @@ export default function HerstellerView({
         <Link key={index} href={`/${kategorie}/${hersteller}/${item.id}`}>
           <div className="flex flex-col bg-items rounded-md justify-center items-center h-16 md:h-32 lg:h-48 xl:h-64 text-lg font-bold">
             <h2>{item.name}</h2>
-            <p>{item.price}</p>
+            <p>{item.price} €</p>
           </div>
         </Link>
       ))}

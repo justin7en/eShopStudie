@@ -34,8 +34,11 @@ export default async function Hersteller({
   }));
 
   return (
-    <div className="p-2">
-      <HerstellerView artikelList={article} kategorie={params.kategorie} hersteller={params.hersteller} />
+    <div className="flex flex-col items-center p-2 space-y-2">
+      <h1 className="text-lg font-bold">Hersteller: {params.hersteller}</h1>
+      <div className="w-full">
+        <HerstellerView artikelList={article} kategorie={params.kategorie} hersteller={params.hersteller} />
+      </div>
     </div>
   )
 }
