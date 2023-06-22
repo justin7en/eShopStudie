@@ -1,7 +1,7 @@
 import Image from "next/image"
-import Iphone from "../public/IphonePrototyp.png"
 import { db } from "../firebase"
 import { getDocs, collection, query, where } from "firebase/firestore"
+import { getImageUrl } from "./artikelView";
 
 interface HighlightItem {
   id: string;
@@ -10,6 +10,7 @@ interface HighlightItem {
   Name: string;
   Beschreibung: string;
   Highlight: boolean;
+  Preis: number;
 }
 
 async function getHighlightItems() {
@@ -29,23 +30,26 @@ async function getHighlightItems() {
     Name: doc.data().Name,
     Beschreibung: doc.data().Beschreibung,
     Highlight: doc.data().Highlight,
+    Preis: doc.data().Preis,
   }));
 
   return filteredData
 }
 
-function HighlightItem( { item }: { item: HighlightItem } ) {
+async function HighlightItem( { item }: { item: HighlightItem } ) {
+  const imageUrl = await getImageUrl(item.Kategorie, item.Hersteller, item.Name)
   return (
     <div className="flex bg-items p-2 rounded-sm h-64 ">
       <div className="grow">
         <h1 className="font-bold text-lg">{item.Name}</h1>
         <p>{item.Beschreibung}</p>
+        <p>{item.Preis}</p>
       </div>
       <Image 
-      src={Iphone}
-      alt="Iphone"
-      style={{objectFit: "contain"}}
-      className="w-auto"
+      src={imageUrl}
+      alt="Highlight Item"
+      width={400}
+      height={400}
       />
     </div>
   )

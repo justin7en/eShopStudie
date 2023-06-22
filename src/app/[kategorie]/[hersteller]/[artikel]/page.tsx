@@ -25,7 +25,9 @@ export default async function Artikel({
   const artikel = {
     Name:  content.data.data().Name,
     Preis: content.data.data().Preis,
-    Beschreibung: content.data.data().Beschreibung
+    Beschreibung: content.data.data().Beschreibung,
+    kategorie: params.kategorie,
+    hersteller: params.hersteller,
   }
   return (
     <div className="p-2">
