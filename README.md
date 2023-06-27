@@ -1,14 +1,14 @@
 # eShopStudie
-Diese Webseite wird für die Studie meiner Bachelorarbeit verwendet. Ziel der Studie ist es, zwei verschiedene Positionen des Navigationsmenüs (in diesem Fall links vertikal und oben horizontal) zu vergleichen und zu untersuchen, welche von beiden eine bessere Performance aufweist.
+Diese Webseite wird für die Studie meiner Bachelorarbeit verwendet. Ziel der Studie ist es, zwei verschiedene Positionen des Navigationsmenüs (in diesem Fall links vertikal und oben horizontal) zu vergleichen und zu untersuchen, welche von beiden eine bessere Performance aufweist. Dabei liegt der Fokus auf der Navigation und weniger auf der Komplexität der einzelnen Seiten.
 
-#Technologien
+# Technologien
 - NextJS 13
 - Typescript
 - Tailwindcss
 - shadcn (unstyled components)
 - Backend: Firebase mit Firestore(für die Daten) und Storage(für die Bilder)
 
-#Details
+# Details
 - ca. 29 verschiedene Seiten
 - Navbar Kategorien werden aus der Datenbank gelesene
 - Kategorie, Hersteller und Artikel sind dynamisch geroutet, wobei der Name der Kategorie und des Herstellers, sowie für den Artikel die ID verwendet wird
@@ -16,7 +16,7 @@ Diese Webseite wird für die Studie meiner Bachelorarbeit verwendet. Ziel der St
 - Artikel besteht aus: ID(String), Name(String), Hersteller(String), Kategorie(String), Preis(Number) und Highlight(Boolean)
 - HerstellerInKategorie -> Kategoriename(String) -> Hersteller(String Array)
 
-#Struktur
+# Struktur
 - Homepage
     - Smartphone
         - Apple
