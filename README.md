@@ -10,9 +10,9 @@ Diese Webseite wird für die Studie meiner Bachelorarbeit verwendet. Ziel der St
 
 # Details
 - ca. 29 verschiedene Seiten
-- Navbar Kategorien werden aus der Datenbank gelesene
+- Navbar Hersteller in den  Kategorien werden aus der Datenbank gelesen
 - Kategorie, Hersteller und Artikel sind dynamisch geroutet, wobei der Name der Kategorie und des Herstellers, sowie für den Artikel die ID verwendet wird
-- Homepage zeigt Highlight Artikel an, dieses kann mittels Boolean bei jedem Artikel einzeln eingestellt werden
+- Homepage zeigt Highlight Artikel an, diese können mittels Boolean bei jedem Artikel einzeln eingestellt werden
 - Artikel besteht aus: ID(String), Name(String), Hersteller(String), Kategorie(String), Preis(Number) und Highlight(Boolean)
 - HerstellerInKategorie -> Kategoriename(String) -> Hersteller(String Array)
 
