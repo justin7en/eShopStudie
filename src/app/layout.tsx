@@ -2,8 +2,15 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import NavbarT from "../../components/navbar";
 import NavbarL from "../../components/navbarL";
+import MazeLoader from '../lib/mazeLoader';
 
 const inter = Inter({ subsets: ['latin'] })
+
+declare global {
+  interface Window {
+    mazeUniversalSnippetApiKey: any;
+  }
+}
 
 export const metadata = {
   title: 'Device Heaven',
@@ -15,9 +22,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const activated = true
+  const activated = true;
+
   return (
     <html lang="de">
+      <MazeLoader />
       <body className={inter.className}>
         { activated  
         ? 
