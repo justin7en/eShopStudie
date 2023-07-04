@@ -11,6 +11,7 @@ export default function Home() {
       width={1100}
       height={100}
       />
+      <h1 className="font-bold text-lg">Highlights der Woche</h1>
       <HighlightItemList />
     </div>
   )

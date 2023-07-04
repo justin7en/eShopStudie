@@ -20,14 +20,13 @@ export default function Alert() {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Bist du mit der Aufgabe fertig?</AlertDialogTitle>
+            <AlertDialogTitle>Artikel erfolgreich gekauft!</AlertDialogTitle>
             <AlertDialogDescription>
-              Beschreibung
+              Wollen sie noch weitere Artikel kaufen?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-            <AlertDialogAction>Fertig</AlertDialogAction>
+            <AlertDialogAction>weiter Einkaufen</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
