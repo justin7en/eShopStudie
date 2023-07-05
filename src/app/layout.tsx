@@ -22,7 +22,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const activated = true;
+  const activated = false;
 
   return (
     <html lang="de">
