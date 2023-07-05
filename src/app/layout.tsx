@@ -23,7 +23,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const activated = true;
-
   return (
     <html lang="de">
       <MazeLoader />
